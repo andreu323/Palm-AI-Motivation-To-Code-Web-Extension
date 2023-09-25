@@ -1,4 +1,4 @@
 **/dist
 **/node_modules
 .DS_Store
-./src/config.js
+src/config.js
