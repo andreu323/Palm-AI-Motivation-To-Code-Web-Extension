@@ -3,9 +3,9 @@ const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta3/models/t
 
 
 export async function generateText(title, author) {
-    const promt = `motivate me to code and design in style "bro" and take me from watching videos the title is "${title}" video author nickname is  "${author}"
+    const promt = `motivate user to code and design in answer in style of "bro" and make me stop watching videos, user is watching youtube video and title is "${title}" video author nickname is  "${author}"
         do not use characters like * or at ur answer.
-        do not format ur answer.  
+        do not format ur answer. 
         keep your answer at 50 characters maximum.
     `;
     const prompt = {
