@@ -1,23 +1,50 @@
 import { API_KEY } from "~/config";
-const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=' + API_KEY;
-
+const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + API_KEY;
+const languege = "RUSSIAN";
 
 export async function generateText(title, author) {
-    const promt = `motivate user to code and design in answer in style of "bro" and make me stop watching videos, user is watching youtube video and title is "${title}" video author nickname is  "${author}"
+    const promt = `
+        motivate user to code and design in answer in style of "bro" and make him stop watching videos make ur answer with the video context, user is watching youtube video and title is "${title}" video author nickname is  "${author}"
         do not use characters like * or at ur answer.
-        do not format ur answer. 
+        do not format ur answer.  
         keep your answer at 50 characters maximum.
+        answer on this languege: ${languege}
     `;
     const prompt = {
-        "prompt": { "text": promt },
-
-        "temperature": 0.7,
-        "candidate_count": 1,
-        "top_k": 40,
-        "top_p": 0.95,
-        "max_output_tokens": 1024,
-        "stop_sequences": [],
-        "safety_settings": [{ "category": "HARM_CATEGORY_DEROGATORY", "threshold": 4 }, { "category": "HARM_CATEGORY_TOXICITY", "threshold": 4 }, { "category": "HARM_CATEGORY_VIOLENCE", "threshold": 4 }, { "category": "HARM_CATEGORY_SEXUAL", "threshold": 1 }, { "category": "HARM_CATEGORY_MEDICAL", "threshold": 4 }, { "category": "HARM_CATEGORY_DANGEROUS", "threshold": 4 }]
+        "contents": [
+            { 
+              "parts": [
+                {
+                  "text": promt
+                }
+              ]
+            }
+          ],
+          "generationConfig": {
+            "temperature": 0.9,
+            "topK": 1,
+            "topP": 1,
+            "maxOutputTokens": 2048,
+            "stopSequences": []
+          },
+          "safetySettings": [
+            {
+              "category": "HARM_CATEGORY_HARASSMENT",
+              "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+            },
+            {
+              "category": "HARM_CATEGORY_HATE_SPEECH",
+              "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+            },
+            {
+              "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+              "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+            },
+            {
+              "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+              "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+            }
+          ]
     };
 
     const response = await fetch(API_ENDPOINT, {
@@ -27,5 +54,5 @@ export async function generateText(title, author) {
 
     const text = await response.json();
 
-    return text.candidates[0].output;
+    return text.candidates[0]?.content?.parts[0]?.text;
 }

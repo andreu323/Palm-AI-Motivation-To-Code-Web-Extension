@@ -1,6 +1,6 @@
 {
   "name": "code_pls",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Code Pls Web Extension",
   "author": "andrey zonin",
   "description": "makes with palm ai motivation to code subtitle by using video title context and author nickname",
