@@ -1,13 +1,13 @@
 import { API_KEY } from "~/config";
 const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + API_KEY;
-const languege = "RUSSIAN";
+const languege = "ENGLISH";
 
 export async function generateText(title, author) {
     const promt = `
         motivate user to code and design in answer in style of "bro" and make him stop watching videos make ur answer with the video context, user is watching youtube video and title is "${title}" video author nickname is  "${author}"
         do not use characters like * or at ur answer.
         do not format ur answer.  
-        keep your answer at 50 characters maximum.
+        keep your answer at 30 characters maximum.
         answer on this languege: ${languege}
     `;
     const prompt = {
