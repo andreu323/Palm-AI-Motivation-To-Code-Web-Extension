@@ -1,5 +1,5 @@
 import { API_KEY } from "~/config";
-const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + API_KEY;
+const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=' + API_KEY;
 const languege = "ENGLISH";
 
 export async function generateText(title, author) {
